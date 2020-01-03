@@ -3,6 +3,7 @@ require 'test_helper'
 class DoctorsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @doctor = doctors(:one)
+    @role = roles(:one)
   end
 
   test "should get index" do
@@ -15,8 +16,8 @@ class DoctorsControllerTest < ActionDispatch::IntegrationTest
       post doctors_url, params: { doctor: { 
         first_name: 'Hunch',
         last_name: 'Moses',
-        role: 'Managing Pharma',
         price: 200,
+        role_id: @role.id,
         years_experience: 5
        } }, as: :json
     end
@@ -33,7 +34,7 @@ class DoctorsControllerTest < ActionDispatch::IntegrationTest
     patch doctor_url(@doctor), params: { doctor: { 
       first_name: 'Hunch',
       last_name: 'Moses',
-      role: 'Managing Pharma',
+      role_id: @role.id,
       price: 200,
       years_experience: 5
      } }, as: :json
