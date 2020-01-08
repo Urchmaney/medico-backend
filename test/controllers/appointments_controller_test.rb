@@ -8,13 +8,13 @@ class AppointmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get appointments_url, as: :json
+    get api_v1_appointments_url, as: :json
     assert_response :success
   end
 
   test "should create appointment" do
     assert_difference('Appointment.count') do
-      post appointments_url, params: {
+      post api_v1_appointments_url, params: {
         appointment: { 
           doctor_id: @doctor.id,
           user_id: @user.id,
@@ -27,12 +27,12 @@ class AppointmentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show appointment" do
-    get appointment_url(@appointment), as: :json
+    get api_v1_appointment_url(@appointment), as: :json
     assert_response :success
   end
 
   test "should update appointment" do
-    patch appointment_url(@appointment), params: { appointment: { 
+    patch api_v1_appointment_url(@appointment), params: { appointment: { 
       doctor_id: @doctor.id,
       user_id: @user.id,
       date: DateTime.now,
@@ -42,7 +42,7 @@ class AppointmentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should destroy appointment" do
     assert_difference('Appointment.count', -1) do
-      delete appointment_url(@appointment), as: :json
+      delete api_v1_appointment_url(@appointment), as: :json
     end
 
     assert_response 204

@@ -1,4 +1,4 @@
-class RolesController < ApplicationController
+class API::V1::RolesController < ApplicationController
   before_action :set_role, only: [:show, :update, :destroy]
 
   # GET /roles
@@ -18,7 +18,7 @@ class RolesController < ApplicationController
     @role = Role.new(role_params)
 
     if @role.save
-      render json: @role, status: :created, location: @role
+      render json: @role, status: :created, location: api_v1_role_url(@role)
     else
       render json: @role.errors, status: :unprocessable_entity
     end

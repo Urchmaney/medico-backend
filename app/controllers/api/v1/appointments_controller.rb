@@ -1,4 +1,4 @@
-class AppointmentsController < ApplicationController
+class API::V1::AppointmentsController < ApplicationController
   before_action :set_appointment, only: [:show, :update, :destroy]
 
   # GET /appointments
@@ -18,7 +18,7 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.new(appointment_params)
 
     if @appointment.save
-      render json: @appointment, status: :created, location: @appointment
+      render json: @appointment, status: :created, location: api_v1_appointment_url(@appointment)
     else
       render json: @appointment.errors, status: :unprocessable_entity
     end

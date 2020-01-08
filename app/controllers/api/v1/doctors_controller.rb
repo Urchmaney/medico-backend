@@ -1,4 +1,4 @@
-class DoctorsController < ApplicationController
+class API::V1::DoctorsController < ApplicationController
   before_action :set_doctor, only: [:show, :update, :destroy]
 
   # GET /doctors
@@ -18,7 +18,7 @@ class DoctorsController < ApplicationController
     @doctor = Doctor.new(doctor_params)
 
     if @doctor.save
-      render json: @doctor, status: :created, location: @doctor
+      render json: @doctor, status: :created, location: api_v1_doctor_url(@doctor)
     else
       render json: @doctor.errors, status: :unprocessable_entity
     end

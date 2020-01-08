@@ -7,13 +7,13 @@ class DoctorsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get doctors_url, as: :json
+    get api_v1_doctors_url, as: :json
     assert_response :success
   end
 
   test "should create doctor" do
     assert_difference('Doctor.count') do
-      post doctors_url, params: { doctor: { 
+      post api_v1_doctors_url, params: { doctor: { 
         first_name: 'Hunch',
         last_name: 'Moses',
         price: 200,
@@ -26,12 +26,12 @@ class DoctorsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show doctor" do
-    get doctor_url(@doctor), as: :json
+    get api_v1_doctor_url(@doctor), as: :json
     assert_response :success
   end
 
   test "should update doctor" do
-    patch doctor_url(@doctor), params: { doctor: { 
+    patch api_v1_doctor_url(@doctor), params: { doctor: { 
       first_name: 'Hunch',
       last_name: 'Moses',
       role_id: @role.id,
@@ -43,7 +43,7 @@ class DoctorsControllerTest < ActionDispatch::IntegrationTest
 
   test "should destroy doctor" do
     assert_difference('Doctor.count', -1) do
-      delete doctor_url(@doctor), as: :json
+      delete api_v1_doctor_url(@doctor), as: :json
     end
 
     assert_response 204

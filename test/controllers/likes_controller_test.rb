@@ -8,31 +8,31 @@ class LikesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get index" do
-    get likes_url, as: :json
+    get api_v1_likes_url, as: :json
     assert_response :success
   end
 
   test "should create like" do
     assert_difference('Like.count') do
-      post likes_url, params: { doctor_id: @doctor.id, user_id: @user.id }, as: :json
+      post api_v1_likes_url, params: { doctor_id: @doctor.id, user_id: @user.id }, as: :json
     end
 
     assert_response 201
   end
 
   test "should show like" do
-    get like_url(@like), as: :json
+    get api_v1_like_url(@like), as: :json
     assert_response :success
   end
 
   test "should update like" do
-    patch like_url(@like), params: { doctor_id: @doctor.id, user_id: @user.id }, as: :json
+    patch api_v1_like_url(@like), params: { doctor_id: @doctor.id, user_id: @user.id }, as: :json
     assert_response 200
   end
 
   test "should destroy like" do
     assert_difference('Like.count', -1) do
-      delete like_url(@like), as: :json
+      delete api_v1_like_url(@like), as: :json
     end
 
     assert_response 204
