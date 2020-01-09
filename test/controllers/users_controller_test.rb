@@ -2,43 +2,44 @@ require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @token = Auth.issue({username: users(:one).username})
     @user = users(:one)
   end
 
   test "should get index" do
-    get api_v1_users_url, as: :json
+    h_get api_v1_users_url, @token
     assert_response :success
   end
 
   test "should create user" do
     assert_difference('User.count') do
-      post api_v1_users_url, params: { user: {
+      h_post api_v1_users_url, { user: {
         first_name: 'Manny',
         last_name: 'More',
         username: 'mmany'
-        } }, as: :json
+        } }, @token
     end
 
     assert_response 201
   end
 
   test "should show user" do
-    get api_v1_user_url(@user), as: :json
+    h_get api_v1_user_url(@user), @token
     assert_response :success
   end
 
   test "should update user" do
-    patch api_v1_user_url(@user), params: { user: {
+    h_patch api_v1_user_url(@user), { user: {
         first_name: 'Manny',
         last_name: 'More',
         username: 'mmaney'
-      } }, as: :json
+      } }, @token
     assert_response 200
   end
 
   test "should destroy user" do
     assert_difference('User.count', -1) do
-      delete api_v1_user_url(@user), as: :json
+      h_delete api_v1_user_url(@user), @token
     end
 
     assert_response 204

@@ -2,48 +2,49 @@ require 'test_helper'
 
 class DoctorsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @token = Auth.issue({username: users(:one).username})
     @doctor = doctors(:one)
     @role = roles(:one)
   end
 
   test "should get index" do
-    get api_v1_doctors_url, as: :json
+    h_get api_v1_doctors_url, @token
     assert_response :success
   end
 
   test "should create doctor" do
     assert_difference('Doctor.count') do
-      post api_v1_doctors_url, params: { doctor: { 
+      h_post api_v1_doctors_url, { doctor: { 
         first_name: 'Hunch',
         last_name: 'Moses',
         price: 200,
         role_id: @role.id,
         years_experience: 5
-       } }, as: :json
+       } }, @token
     end
 
     assert_response 201
   end
 
   test "should show doctor" do
-    get api_v1_doctor_url(@doctor), as: :json
+    h_get api_v1_doctor_url(@doctor), @token
     assert_response :success
   end
 
   test "should update doctor" do
-    patch api_v1_doctor_url(@doctor), params: { doctor: { 
+    h_patch api_v1_doctor_url(@doctor), { doctor: { 
       first_name: 'Hunch',
       last_name: 'Moses',
       role_id: @role.id,
       price: 200,
       years_experience: 5
-     } }, as: :json
+     } }, @token
     assert_response 200
   end
 
   test "should destroy doctor" do
     assert_difference('Doctor.count', -1) do
-      delete api_v1_doctor_url(@doctor), as: :json
+      h_delete api_v1_doctor_url(@doctor), @token
     end
 
     assert_response 204
