@@ -1,4 +1,6 @@
 class API::V1::SessionsController < ApplicationController
+  skip_before_action :authenticate
+  
   def create
     user = User.find_by(username: auth_params[:username])
     result = { error: 'Incorrect details.' }
@@ -14,6 +16,6 @@ class API::V1::SessionsController < ApplicationController
   private
 
   def auth_params
-    params.permit(:username)
+    params.require(:auth).permit(:username)
   end
 end
