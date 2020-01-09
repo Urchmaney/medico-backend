@@ -10,7 +10,7 @@ class API::V1::RolesController < ApplicationController
 
   # GET /roles/1
   def show
-    render json: @role
+    render json: @role.doctors
   end
 
   # POST /roles

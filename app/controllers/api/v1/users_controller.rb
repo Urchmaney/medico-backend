@@ -1,4 +1,5 @@
 class API::V1::UsersController < ApplicationController
+  skip_before_action :authenticate, only: [:create]
   before_action :set_user, only: [:show, :update, :destroy]
 
   # GET /users
@@ -18,9 +19,9 @@ class API::V1::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      render json: @user, status: :created, location: api_v1_user_url(@user)
+      render json: { token: Auth.issue(username: @user.username) }, status: :created, location: api_v1_user_url(@user)
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: { error: @user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
