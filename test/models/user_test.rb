@@ -10,4 +10,15 @@ class UserTest < ActiveSupport::TestCase
     user = User.new(username: 'moon');
     assert_not user.save
   end
+
+  test "Can create user with first, last name and username" do
+    user = User.new(username: 'moon', first_name: 'Jude', last_name: 'Lukwe');
+    assert user.save
+  end
+
+  test "Can't create user with already existing username" do
+    user = User.create(username: 'moon', first_name: 'Light', last_name: 'sun');
+    newUser = User.new(username: 'moon', first_name: 'Lightb', last_name: 'sun');
+    assert_not newUser.save
+  end
 end
