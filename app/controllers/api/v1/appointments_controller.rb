@@ -3,9 +3,9 @@ class API::V1::AppointmentsController < ApplicationController
 
   # GET /appointments
   def index
-    @appointments = Appointment.all
+    @appointments = current_user.appointments
 
-    render json: @appointments
+    render json: @appointments, include: { doctor: { only: [:first_name, :last_name] }}
   end
 
   # GET /appointments/1
@@ -16,11 +16,10 @@ class API::V1::AppointmentsController < ApplicationController
   # POST /appointments
   def create
     @appointment = Appointment.new(appointment_params)
-
     if @appointment.save
       render json: @appointment, status: :created, location: api_v1_appointment_url(@appointment)
     else
-      render json: @appointment.errors, status: :unprocessable_entity
+      render json: { error: @appointment.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -46,6 +45,6 @@ class API::V1::AppointmentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def appointment_params
-      params.require(:appointment).permit(:doctor_id, :user_id, :date, :time)
+      params.require(:appointment).permit(:doctor_id, :date, :time).merge(user_id: current_user.id)
     end
 end

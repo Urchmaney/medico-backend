@@ -18,7 +18,6 @@ class AppointmentsControllerTest < ActionDispatch::IntegrationTest
       h_post api_v1_appointments_url, {
         appointment: { 
           doctor_id: @doctor.id,
-          user_id: @user.id,
           date: DateTime.now,
           time: '2PM' } 
        }, @token
@@ -35,7 +34,6 @@ class AppointmentsControllerTest < ActionDispatch::IntegrationTest
   test "should update appointment" do
     h_patch api_v1_appointment_url(@appointment), { appointment: { 
       doctor_id: @doctor.id,
-      user_id: @user.id,
       date: DateTime.now,
       time: '2PM' } }, @token
     assert_response 200
