@@ -7,7 +7,7 @@ class API::V1::SessionsController < ApplicationController
     status = 400
     if user
       jwt = Auth.issue(username: user.username)
-      result = { token: jwt } 
+      result = { token: jwt, user: user } 
       status = 200
     end
     render json: result , status: status
