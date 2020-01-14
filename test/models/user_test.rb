@@ -13,7 +13,7 @@ class UserTest < ActiveSupport::TestCase
     assert_not user.save
   end
 
-  test 'Can create user with first, last name and username' do     
+  test 'Can create user with first, last name and username' do  
     assert User.new(username: 'moon', first_name: 'Jude', last_name: 'Lukwe').save
   end
 
