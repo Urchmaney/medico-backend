@@ -17,7 +17,9 @@ This is the web api section of the simple medico application built using ruby on
 
 2. Run `bundle install` to install all required gems.
 
-3. Run `rails server` to host on your local machine. can host it on a live server and make neccessary changes to api links.
+3. Run `rails db:create` and `rails db:migrate` to set up database.
+
+4. Run `rails server` to host on your local machine. can host it on a live server and make neccessary changes to api links.
 
 ### Authors
 ---
