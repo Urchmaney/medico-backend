@@ -5,7 +5,8 @@ class API::V1::AppointmentsController < ApplicationController
   def index
     @appointments = current_user.appointments
 
-    render json: @appointments, include: { doctor: { only: [:first_name, :last_name] }}
+    render json: @appointments, 
+      include: { doctor: { only: %i[first_name, last_name] } }
   end
 
   # GET /appointments/1
