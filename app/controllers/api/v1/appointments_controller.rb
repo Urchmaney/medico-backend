@@ -22,7 +22,8 @@ class API::V1::AppointmentsController < ApplicationController
     if @appointment.save
       render json: @appointment, status: :created, location: api_v1_appointment_url(@appointment)
     else
-      render json: { error: @appointment.errors.full_messages }, status: :unprocessable_entity
+      render json: { error: @appointment.errors.full_messages },
+             status: :unprocessable_entity
     end
   end
 
@@ -49,6 +50,7 @@ class API::V1::AppointmentsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def appointment_params
-    params.require(:appointment).permit(:doctor_id, :date, :time).merge(user_id: current_user.id)
+    params.require(:appointment).permit(:doctor_id, :date, :time)
+          .merge(user_id: current_user.id)
   end
 end
