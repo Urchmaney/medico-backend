@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::API
   before_action :authenticate
 
@@ -32,6 +34,7 @@ class ApplicationController < ActionController::API
 
   def auth_present?
     return false unless request.env['HTTP_AUTHORIZATION']
+
     request.env['HTTP_AUTHORIZATION'].scan(/Bearer/).flatten.first
   end
 end

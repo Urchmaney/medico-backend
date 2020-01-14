@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 class API::V1::AppointmentsController < ApplicationController
-  before_action :set_appointment, only: [:show, :update, :destroy]
+  before_action :set_appointment, only: %i[show update destroy]
 
   # GET /appointments
   def index
     @appointments = current_user.appointments
 
-    render json: @appointments, 
-      include: { doctor: { only: %i[first_name, last_name] } }
+    render json: @appointments,
+           include: { doctor: { only: %i[first_name last_name] } }
   end
 
   # GET /appointments/1
@@ -39,13 +41,14 @@ class API::V1::AppointmentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_appointment
-      @appointment = Appointment.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def appointment_params
-      params.require(:appointment).permit(:doctor_id, :date, :time).merge(user_id: current_user.id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_appointment
+    @appointment = Appointment.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def appointment_params
+    params.require(:appointment).permit(:doctor_id, :date, :time).merge(user_id: current_user.id)
+  end
 end

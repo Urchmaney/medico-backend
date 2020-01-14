@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class API::V1::UsersController < ApplicationController
   skip_before_action :authenticate, only: [:create]
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: %i[show update destroy]
 
   # GET /users
   def index
@@ -40,13 +42,14 @@ class API::V1::UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def user_params
-      params.require(:user).permit(:first_name, :last_name, :username)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :username)
+  end
 end

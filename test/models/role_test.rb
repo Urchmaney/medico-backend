@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class RoleTest < ActiveSupport::TestCase
@@ -6,7 +8,7 @@ class RoleTest < ActiveSupport::TestCase
   end
 
   test "can't save role without name" do
-    role = Role.new()
+    role = Role.new
     assert_not role.save
   end
 

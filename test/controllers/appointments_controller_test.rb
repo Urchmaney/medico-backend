@@ -1,45 +1,49 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class AppointmentsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @token = Auth.issue({username: users(:one).username})
+    @token = Auth.issue(username: users(:one).username)
     @appointment = appointments(:one)
     @user = users(:one)
     @doctor = doctors(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     h_get api_v1_appointments_url, @token
     assert_response :success
   end
 
-  test "should create appointment" do
+  test 'should create appointment' do
     assert_difference('Appointment.count') do
       h_post api_v1_appointments_url, {
-        appointment: { 
+        appointment: {
           doctor_id: @doctor.id,
           date: DateTime.now,
-          time: '2PM' } 
-       }, @token
+          time: '2PM'
+        }
+      }, @token
     end
 
     assert_response 201
   end
 
-  test "should show appointment" do
+  test 'should show appointment' do
     h_get api_v1_appointment_url(@appointment), @token
     assert_response :success
   end
 
-  test "should update appointment" do
-    h_patch api_v1_appointment_url(@appointment), { appointment: { 
+  test 'should update appointment' do
+    h_patch api_v1_appointment_url(@appointment), { appointment: {
       doctor_id: @doctor.id,
       date: DateTime.now,
-      time: '2PM' } }, @token
+      time: '2PM'
+    } }, @token
     assert_response 200
   end
 
-  test "should destroy appointment" do
+  test 'should destroy appointment' do
     assert_difference('Appointment.count', -1) do
       h_delete api_v1_appointment_url(@appointment), @token
     end

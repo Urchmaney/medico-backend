@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class API::V1::LikesController < ApplicationController
-  before_action :set_like, only: [:show, :update, :destroy]
+  before_action :set_like, only: %i[show update destroy]
 
   # GET /likes
   def index
@@ -39,13 +41,14 @@ class API::V1::LikesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_like
-      @like = Like.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def like_params
-      params.permit(:doctor_id, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_like
+    @like = Like.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def like_params
+    params.permit(:doctor_id, :user_id)
+  end
 end
