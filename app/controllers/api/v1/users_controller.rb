@@ -21,7 +21,7 @@ class API::V1::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      render json: { token: Auth.issue(username: @user.username) },
+      render json: { token: Auth.issue(username: @user.username), user: @user },
              status: :created, location: api_v1_user_url(@user)
     else
       render json: { error: @user.errors.full_messages },
