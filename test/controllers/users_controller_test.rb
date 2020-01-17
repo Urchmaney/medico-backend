@@ -10,11 +10,11 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test 'should create user' do
     assert_difference('User.count') do
-      h_post api_v1_users_url, { user: {
+      h_post api_v1_users_url, user: {
         first_name: 'Manny',
         last_name: 'More',
         username: 'mmany'
-      } }
+      }
     end
 
     assert_response 201
