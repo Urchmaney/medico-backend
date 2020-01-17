@@ -19,7 +19,10 @@ This is the web api section of the simple medico application built using ruby on
 
 3. Run `rails db:create` and `rails db:migrate` to set up database.
 
-4. Run `rails server` to host on your local machine. can host it on a live server and make neccessary changes to api links.
+4. Run `rails test` to run tests and confirm all test run successfully.
+
+4. Run `rails server` to host on your local machine. It can also be hosted it on a live server.But make neccessary changes to api links in calling application.
+
 
 ### Authors
 ---

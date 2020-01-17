@@ -8,7 +8,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_response 200
   end
 
-  test 'should not create session for new user' do
+  test 'should not create session for unknown user' do
     post api_v1_sessions_url, params: { auth: { username: 'mike' } }
     assert_response 400
   end

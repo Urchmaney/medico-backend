@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :doctors
-      resources :appointments
-      resources :likes
-      resources :roles
-      resources :users
+      resources :appointments, only: [:index, :create]
+      resources :roles, only: [:index, :show]
+      resources :users, only: [:create]
       resources :sessions, only: [:create]
     end
   end

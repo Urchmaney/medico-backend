@@ -28,26 +28,4 @@ class AppointmentsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response 201
   end
-
-  test 'should show appointment' do
-    h_get api_v1_appointment_url(@appointment), @token
-    assert_response :success
-  end
-
-  test 'should update appointment' do
-    h_patch api_v1_appointment_url(@appointment), { appointment: {
-      doctor_id: @doctor.id,
-      date: DateTime.now,
-      time: '2PM'
-    } }, @token
-    assert_response 200
-  end
-
-  test 'should destroy appointment' do
-    assert_difference('Appointment.count', -1) do
-      h_delete api_v1_appointment_url(@appointment), @token
-    end
-
-    assert_response 204
-  end
 end
