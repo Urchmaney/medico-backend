@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'
@@ -10,4 +12,19 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def h_get(url, token = '')
+    get url, headers: { 'Authorization': 'Bearer ' + token }, as: :json
+  end
+
+  def h_post(url, params, token = '')
+    post url, params: params, headers: { 'Authorization': 'Bearer ' + token }, as: :json
+  end
+
+  def h_patch(url, params, token = '')
+    patch url, params: params, headers: { 'Authorization': 'Bearer ' + token }, as: :json
+  end
+
+  def h_delete(url, token = '')
+    delete url, headers: { 'Authorization': 'Bearer ' + token }, as: :json
+  end
 end

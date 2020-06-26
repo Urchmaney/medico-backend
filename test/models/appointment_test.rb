@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class AppointmentTest < ActiveSupport::TestCase
@@ -7,12 +9,12 @@ class AppointmentTest < ActiveSupport::TestCase
   end
 
   test 'appointment should have date' do
-    appointment =  Appointment.new(user_id: @user.id, doctor_id: @doctor.id)
+    appointment = Appointment.new(user_id: @user.id, doctor_id: @doctor.id)
     assert_not appointment.save
   end
 
   test 'appointment should have time' do
-    appointment =  Appointment.new(user_id: @user.id, doctor_id: @doctor.id)
+    appointment = Appointment.new(user_id: @user.id, doctor_id: @doctor.id)
     assert_not appointment.save
   end
 
